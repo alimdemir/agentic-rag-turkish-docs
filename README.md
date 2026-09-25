@@ -45,6 +45,20 @@ flowchart TD
 
 Hibrit yöntem doğru belgeyi her soruda ilk üçe taşıyor ama ilk sıradaki isabet düşüyor. Bu yüzden ilk getirme geniş bir aday havuzu olarak kullanılıyor, sıralamayı reranker yapıyor.
 
+### Colab GPU sonuçları (not defteri 03)
+
+| Yöntem | hit@1 | hit@3 | MRR |
+|---|---|---|---|
+| BM25 | 0.917 | 0.917 | 0.917 |
+| multilingual-e5-base (FAISS) | **1.000** | **1.000** | **1.000** |
+| Hibrit (0.5 / 0.5) | 0.917 | 1.000 | 0.944 |
+| Hibrit + bge-reranker-v2-m3 | **1.000** | **1.000** | **1.000** |
+
+- Çok dilli E5 modeli, WordLlama'nın kaçırdığı soruyu da ilk sıraya taşıyor. Reranker ise hibrit getirmenin ilk sıradaki kaybını geri alıyor.
+- En iyi reranker skoru, yanıtı olan sorularda en az **0.198** (medyan 0.995), yanıtı olmayan sorularda en çok **0.012**. Yeniden arama eşiği **0.105** seçildi.
+- Ajan döngüsü: yanıtı olan sorular tek denemede kaynaklı yanıtlandı (5–7 sn, T4). "Yemek kartı limiti" sorusunda model sorguyu iki kez yeniden yazdı; skor 0'da kaldı ve sistem **"Belgelerde bu soruyu yanıtlayacak bilgi bulunamadı."** dedi.
+- Karşılaşılan sorun: transformers 5'te `apply_chat_template(return_tensors="pt")` tensör yerine `BatchEncoding` döndürdüğü için `KeyError: 'shape'` alındı. Şablon önce metin olarak üretilip ayrıca tokenize edildi.
+
 ## Kurulum
 
 ```bash
@@ -67,6 +81,8 @@ pytest -v                                  # 6 test
 |---|---|
 | ![](docs/ekran_goruntuleri/01_parcalama.png)<br/>Başlık + karakter sınırıyla parçalama | ![](docs/ekran_goruntuleri/02_faiss_getirme.png)<br/>FAISS ile getirilen bölümler |
 | ![](docs/ekran_goruntuleri/03_bm25_embedding_hibrit.png)<br/>BM25 / embedding / hibrit karşılaştırması | |
+| ![](docs/ekran_goruntuleri/05_colab_e5_reranker_degerlendirme.jpg)<br/>Colab: E5 + reranker değerlendirmesi | ![](docs/ekran_goruntuleri/06_colab_ajan_dongusu.jpg)<br/>Colab: ajan döngüsü, yeniden yazma ve "bilgi bulunamadı" |
+| ![](docs/ekran_goruntuleri/04_colab_transformers5_hatasi.jpg)<br/>transformers 5 ile `KeyError: 'shape'` | |
 
 ## Lisans
 
