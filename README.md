@@ -96,10 +96,12 @@ pytest -v                                  # 8 test
 
 ## Ekran görüntüleri
 
+Not defterleri 01–02 MacBook Air (Apple Silicon, Python 3.12, internetsiz WordLlama) üzerinde, 03–04 Colab'da A100 GPU ile çalıştırıldı.
+
 | | |
 |---|---|
-| ![](docs/ekran_goruntuleri/01_parcalama.png)<br/>Başlık + karakter sınırıyla parçalama | ![](docs/ekran_goruntuleri/02_faiss_getirme.png)<br/>FAISS ile getirilen bölümler |
-| ![](docs/ekran_goruntuleri/03_bm25_embedding_hibrit.png)<br/>BM25 / embedding / hibrit karşılaştırması | |
+| ![](docs/ekran_goruntuleri/01_parcalama.jpg)<br/>Mac · başlık + karakter sınırıyla parçalama | ![](docs/ekran_goruntuleri/02_faiss_getirme.jpg)<br/>Mac · FAISS ile getirilen bölümler |
+| ![](docs/ekran_goruntuleri/03_bm25_embedding_hibrit.jpg)<br/>Mac · BM25 / embedding / hibrit karşılaştırması | |
 | ![](docs/ekran_goruntuleri/05_colab_e5_reranker_degerlendirme.jpg)<br/>Colab A100: E5 + reranker değerlendirmesi | ![](docs/ekran_goruntuleri/06_colab_ajan_dongusu.jpg)<br/>Colab A100: ajan döngüsü, yeniden yazma ve "bilgi bulunamadı" |
 | ![](docs/ekran_goruntuleri/07_colab_deep_agents.jpg)<br/>Colab A100: Deep Agents planı, araç çağrıları ve "bulunamadı" | ![](docs/ekran_goruntuleri/04_colab_transformers5_hatasi.jpg)<br/>transformers 5 ile `KeyError: 'shape'` |
 
